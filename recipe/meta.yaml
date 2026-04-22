@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari_manual_transforms-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari_manual_transforms-{{ version }}.tar.gz
   sha256: 0a130791f32a100ec6a92cb2792fe23ed39a6a38977f8b394f226989ddef06d7
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
     - setuptools-scm
   run:
     - magicgui
     - napari
     - numpy
-    - python >=3.8
+    - python >={{ python_min }}
     - pytransform3d
     - qtpy
     - scipy
@@ -37,6 +37,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/tlambert03/napari-manual-transforms
